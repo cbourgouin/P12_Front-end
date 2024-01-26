@@ -1,13 +1,12 @@
 import { DataGrid } from '@mui/x-data-grid';
-import { useEffect, useState } from 'react';
-
+import { useContext } from 'react';
+import { UtilisateurContext } from '../../utils/UserProvider';
+import { useNavigate } from "react-router-dom";
 
 function EmployeeList() {
-    const [employees, setEmployees] = useState([]);
+    const {user, setUser} = useContext(UtilisateurContext);
+    console.log("nb d'objet present avant affichage du tableaux : " + user.length);
 
-    useEffect(() => {
-        setEmployees(JSON.parse(localStorage.getItem('employees')));
-    }, [localStorage.getItem('employees')]);
     
     const columns = [
         { headerName: 'First Name', field: 'firstName' },
@@ -18,11 +17,11 @@ function EmployeeList() {
         { headerName: 'Street', field: 'street' },
         { headerName: 'City', field: 'city' },
         { headerName: 'State', field: 'state' },
-        { headerName: 'Zip Code', field: 'zipCode' },
+        { headerName: 'Zip Code', field: 'zipCode' }
     ]
 
     function getRowId(row) {
-        return employees.indexOf(row);
+        return user.indexOf(row);
     }
 
     return <div id="employee-div" className="container">
@@ -30,7 +29,7 @@ function EmployeeList() {
         <DataGrid
             getRowId={getRowId}
             columns={columns}
-            rows={employees}
+            rows={user}
         />
         <a href="/">Home</a>
     </div>

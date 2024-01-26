@@ -1,0 +1,5 @@
+span {
+    color: -webkit-link;
+    cursor: pointer;
+    text-decoration: underline;
+}

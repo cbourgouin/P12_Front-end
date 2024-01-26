@@ -33,3 +33,9 @@ label {
 .address {
   margin-top: 10px;
 }
+
+span {
+  color: -webkit-link;
+  cursor: pointer;
+  text-decoration: underline;
+}

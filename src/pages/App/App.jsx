@@ -1,7 +1,9 @@
 import './App.css';
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import Modal from '../../components/Modal/Modal';
 import Form from '../../components/Form/Form';
+import { ModalOpenContext } from "../../utils/ModalOpenProvider";
+import { useNavigate } from "react-router-dom";
 
 const states = [
   {
@@ -244,6 +246,10 @@ const states = [
 
 function App() {
 
+  const navigate = useNavigate();
+
+  const {modalOpen, setModalOpen} = useContext(ModalOpenContext);
+
   const [formValues, setFormValues] = useState({
     firstName: '',
     lastName: '',
@@ -256,33 +262,15 @@ function App() {
     zipCode: 0
   });
 
-  const [modalOpen, setModalOpen] = useState(false)
-
-  useEffect(() => {
-    console.log(formValues);
-  }, [formValues]);
-
-  useEffect(() => {
-    console.log(modalOpen);
-  }, [modalOpen]);
-
-  function saveEmployee(e, formValues) {
-    const employees = JSON.parse(localStorage.getItem('employees')) || [];
-    employees.push(formValues);
-    setModalOpen(true);
-    localStorage.setItem('employees', JSON.stringify(employees));
-    e.preventDefault();
-  }
-
   return (
     <div className="App">
       <div className="title">
         <h1>HRnet</h1>
       </div>
       <div className="container">
-        <a href="employee-list">View Current Employees</a>
+        <span onClick={() => navigate("/employee-list")}>View Current Employees</span>
         <h2>Create Employee</h2>
-        <Form states={states} saveEmployee={saveEmployee}></Form>
+        <Form states={states}></Form>
       </div>
       <Modal text="Employee Created!" modalOpen={modalOpen} setModalOpen={setModalOpen}></Modal>
     </div>

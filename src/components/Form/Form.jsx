@@ -1,10 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import InputDatePicker from "../InputDatePicker/InputDatePicker";
 import InputText from "../InputText/InputText";
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
+import { ModalOpenContext } from "../../utils/ModalOpenProvider";
+import { UtilisateurContext } from "../../utils/UserProvider";
 
-function Form({ states, saveEmployee }) {
+function Form({ states }) {
+    const { modalOpen, setModalOpen } = useContext(ModalOpenContext);
+    const { user, setUser } = useContext(UtilisateurContext);
 
     const [formValues, setFormValues] = useState({
         firstName: '',
@@ -18,11 +22,29 @@ function Form({ states, saveEmployee }) {
         zipCode: 0
     });
 
+    // function saveEmployee(e) {
+    //     e.preventDefault();
+    //     const employees = JSON.parse(localStorage.getItem('employees')) || [];
+    //     employees.push(formValues);
+    //     localStorage.setItem('employees', JSON.stringify(employees));
+    //     setModalOpen(true);
+    // }
+
+    function saveEmployee(e) {
+        e.preventDefault();
+        setUser([...user, formValues]);
+        setModalOpen(true);
+    }
+
     useEffect(() => {
         console.log(formValues);
     }, [formValues]);
 
-    return <form action="#" id="create-employee" onSubmit={(e) => saveEmployee(e, formValues)}>
+    useEffect(() => {
+        console.log("nb d'objet present apres mise a jour : " + user.length);
+    }, [user]);
+
+    return <form action="#" id="create-employee" onSubmit={(e) => saveEmployee(e)}>
         <InputText
             id="first-name"
             label="First Name"

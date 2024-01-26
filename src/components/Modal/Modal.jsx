@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-
 function Modal({ text, modalOpen, setModalOpen }) {
 
     return <div

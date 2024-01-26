@@ -9,6 +9,8 @@ import {
 } from "react-router-dom";
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import { UserProvider } from './utils/UserProvider';
+import { ModalOpenProvider } from './utils/ModalOpenProvider';
 
 const router = createBrowserRouter([
   {
@@ -23,9 +25,13 @@ const router = createBrowserRouter([
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <LocalizationProvider dateAdapter={AdapterDayjs}>
-    <React.StrictMode>
-      <RouterProvider router={router} />
-    </React.StrictMode>
-  </LocalizationProvider>
+  <UserProvider>
+    <ModalOpenProvider>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <React.StrictMode>
+          <RouterProvider router={router} />
+        </React.StrictMode>
+      </LocalizationProvider>
+    </ModalOpenProvider>
+  </UserProvider>
 );
