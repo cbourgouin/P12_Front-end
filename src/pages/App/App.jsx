@@ -1,6 +1,6 @@
 import './App.css';
-import { createContext, useContext, useEffect, useState } from 'react';
-import Modal from '../../components/Modal/Modal';
+import { useContext } from 'react';
+import Modal from '@charlybourgouin/p14_modal_component';
 import Form from '../../components/Form/Form';
 import { ModalOpenContext } from "../../utils/ModalOpenProvider";
 import { useNavigate } from "react-router-dom";
@@ -249,18 +249,6 @@ function App() {
   const navigate = useNavigate();
 
   const {modalOpen, setModalOpen} = useContext(ModalOpenContext);
-
-  const [formValues, setFormValues] = useState({
-    firstName: '',
-    lastName: '',
-    dateOfBirth: null,
-    startDate: null,
-    department: '',
-    street: '',
-    city: '',
-    state: '',
-    zipCode: 0
-  });
 
   return (
     <div className="App">
