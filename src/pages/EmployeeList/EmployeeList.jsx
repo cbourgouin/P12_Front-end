@@ -4,7 +4,7 @@ import { UtilisateurContext } from '../../utils/UserProvider';
 import { useNavigate } from "react-router-dom";
 
 function EmployeeList() {
-    navigate = useNavigate()
+    const navigate = useNavigate()
     const {user, setUser} = useContext(UtilisateurContext);
     console.log("nb d'objet present avant affichage du tableaux : " + user.length);
 
