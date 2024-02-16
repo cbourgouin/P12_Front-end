@@ -1,3 +1,6 @@
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
@@ -11,6 +14,9 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { UserProvider } from './utils/UserProvider';
 import { ModalOpenProvider } from './utils/ModalOpenProvider';
+
+dayjs.extend(utc)
+dayjs.extend(timezone)
 
 const router = createBrowserRouter([
   {

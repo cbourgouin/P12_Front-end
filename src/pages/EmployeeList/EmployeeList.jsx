@@ -4,6 +4,7 @@ import { UtilisateurContext } from '../../utils/UserProvider';
 import { useNavigate } from "react-router-dom";
 
 function EmployeeList() {
+    navigate = useNavigate()
     const {user, setUser} = useContext(UtilisateurContext);
     console.log("nb d'objet present avant affichage du tableaux : " + user.length);
 
@@ -31,7 +32,7 @@ function EmployeeList() {
             columns={columns}
             rows={user}
         />
-        <a href="/">Home</a>
+        <span onClick={() => navigate("/")}>Home</span>
     </div>
 }
 
